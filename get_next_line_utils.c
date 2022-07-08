@@ -1,9 +1,9 @@
 #include "get_next_line.h"
 
-void    *ft_calloc(size_t count, size_t size)
+void *ft_calloc(size_t count, size_t size)
 {
-	char	*s1;
-	size_t	i;
+	char *s1;
+	size_t i;
 
 	s1 = (char *)malloc(count * size);
 	if (s1 == NULL)
@@ -14,5 +14,5 @@ void    *ft_calloc(size_t count, size_t size)
 		*(s1 + i) = 0;
 		i++;
 	}
-	return (s1)
+	return (s1);
 }
