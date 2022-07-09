@@ -1,14 +1,25 @@
 #include "get_next_line.h"
 
-char ft_read(int fd, char *buffer)
+char *ft_read(int fd, char *buffer)
 {
+	char *line;
+	int bytes_read;
+
+	line = ft_calloc((BUFFER_SIZE + 1), sizeof(char));
+	bytes_read = 0;
+	while (ft_strchr(buffer, '\n') == 0)
+	{
+		bytes_read = read(fd, line, BUFFER_SIZE);
+		line[bytes_read] = '\0';
+	}
+	printf("%i\n", bytes_read);
+	return (line);
 }
 
 char *get_next_line(int fd)
 {
 	static char *stash[1024];
 	char *line = NULL;
-	int bytes_read;
 
 	if (fd < 0 || fd > 1023 || BUFFER_SIZE <= 0)
 		return (NULL);
