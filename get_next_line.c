@@ -1,5 +1,18 @@
 #include "get_next_line.h"
 
+char *ft_remove_line(char *buffer)
+{
+	int len;
+	char *line;
+
+	len = ft_linelen(buffer);
+	if (!buffer[len])
+	{
+		free(buffer);
+		return (NULL);
+	}
+}
+
 char *ft_extract_line(char *buffer)
 {
 	char *line;
@@ -43,9 +56,7 @@ char *get_next_line(int fd)
 	static char *stash[1024];
 	char *line;
 
-	if (fd < 0 || fd > 1023 || BUFFER_SIZE <= 0)
-		return (NULL);
-	if (read(fd, 0, 0) < 0)
+	if (fd < 0 || fd > 1023 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 		return (NULL);
 	if (!stash[fd])
 		stash[fd] = ft_calloc(1, 1);

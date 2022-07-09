@@ -16,5 +16,6 @@ char *ft_read(int fd, char *buffer);
 char *ft_extract_line(char *buffer);
 size_t ft_strlcpy(char *dst, const char *src, size_t dstsize);
 int ft_strlen(const char *s);
+char *ft_remove_line(char *buffer)
 
 #endif
