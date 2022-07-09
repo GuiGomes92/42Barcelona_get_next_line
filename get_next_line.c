@@ -53,8 +53,5 @@ char *get_next_line(int fd)
 		return (NULL);
 	stash[fd] = ft_read(fd, stash[fd]);
 	line = ft_extract_line(stash[fd]);
-	printf("%s\n", stash[fd]);
-	printf("Middle\n");
-	printf("%s\n", line);
 	return (line);
 }
