@@ -6,6 +6,18 @@ int ft_strlen(const char *s)
 
 	i = 0;
 	while (s[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
+}
+
+int ft_linelen(char *s)
+{
+	int i;
+
+	i = 0;
+	while (s[i] != '\0' && s[i] != '\n')
 		i++;
 	return (i);
 }
@@ -63,4 +75,32 @@ void *ft_calloc(size_t count, size_t size)
 		i++;
 	}
 	return (s1);
+}
+
+size_t ft_strlcpy(char *dst, const char *src, size_t dstsize)
+{
+	size_t i;
+	size_t srclen;
+
+	srclen = ft_strlen(src);
+	i = 0;
+	if (!dstsize)
+		return (srclen);
+	if (dstsize > 0)
+	{
+		while (i != dstsize - 1)
+		{
+			if (src[i] != '\0')
+			{
+				dst[i] = src[i];
+			}
+			else
+			{
+				break;
+			}
+			i++;
+		}
+		dst[i] = '\0';
+	}
+	return (srclen);
 }

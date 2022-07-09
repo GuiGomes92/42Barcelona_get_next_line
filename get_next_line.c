@@ -1,5 +1,18 @@
 #include "get_next_line.h"
 
+char *ft_extract_line(char *buffer)
+{
+	char *line;
+	size_t len;
+
+	if (!buffer || buffer[0] == '\0')
+		return (NULL);
+	len = ft_linelen(buffer) + 1;
+	line = ft_calloc(len, sizeof(char));
+	ft_strlcpy(line, buffer, len);
+	return (line);
+}
+
 char *ft_read(int fd, char *buffer)
 {
 	char *reading;
@@ -28,7 +41,7 @@ char *ft_read(int fd, char *buffer)
 char *get_next_line(int fd)
 {
 	static char *stash[1024];
-	char *line = NULL;
+	char *line;
 
 	if (fd < 0 || fd > 1023 || BUFFER_SIZE <= 0)
 		return (NULL);
@@ -39,6 +52,9 @@ char *get_next_line(int fd)
 	if (stash[fd] == NULL)
 		return (NULL);
 	stash[fd] = ft_read(fd, stash[fd]);
-	printf("%s", stash[fd]);
+	line = ft_extract_line(stash[fd]);
+	printf("%s\n", stash[fd]);
+	printf("Middle\n");
+	printf("%s\n", line);
 	return (line);
 }
