@@ -2,18 +2,27 @@
 
 char *ft_read(int fd, char *buffer)
 {
-	char *line;
+	char *reading;
+	char *new_buffer;
 	int bytes_read;
 
-	line = ft_calloc((BUFFER_SIZE + 1), sizeof(char));
-	bytes_read = 0;
-	while (ft_strchr(buffer, '\n') == 0)
+	if (ft_strchr(buffer, '\n') != 0)
+		return (buffer);
+	reading = ft_calloc((BUFFER_SIZE + 1), sizeof(char));
+	if (reading == NULL)
+		return (NULL);
+	while (ft_strchr(reading, '\n') == 0)
 	{
-		bytes_read = read(fd, line, BUFFER_SIZE);
-		line[bytes_read] = '\0';
+		bytes_read = read(fd, reading, BUFFER_SIZE);
+		if (bytes_read < 1)
+			break;
+		reading[bytes_read] = '\0';
+		new_buffer = ft_strjoin(buffer, reading);
+		free(buffer);
+		buffer = new_buffer;
 	}
-	printf("%i\n", bytes_read);
-	return (line);
+	free(reading);
+	return (buffer);
 }
 
 char *get_next_line(int fd)
@@ -30,5 +39,6 @@ char *get_next_line(int fd)
 	if (stash[fd] == NULL)
 		return (NULL);
 	stash[fd] = ft_read(fd, stash[fd]);
+	printf("%s", stash[fd]);
 	return (line);
 }
