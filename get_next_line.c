@@ -18,7 +18,6 @@ char *get_next_line(int fd)
 		stash[fd] = ft_calloc(1, 1);
 	if (stash[fd] == NULL)
 		return (NULL);
-	stash[fd] = ft_read(fd, buffer[fd]);
-	printf("%s", stash[fd]);
+	stash[fd] = ft_read(fd, stash[fd]);
 	return (line);
 }
