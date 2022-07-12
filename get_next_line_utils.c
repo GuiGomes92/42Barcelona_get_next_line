@@ -63,21 +63,18 @@ char *ft_strjoin(char const *s1, char const *s2)
 void	*ft_calloc(size_t count, size_t size)
 {
 	char	*ptr;
-	size_t	len;
+	size_t	i;
 
-	len = count * size;
-	ptr = (char *)malloc(len);
-	if (ptr)
+	i = 0;
+	ptr = (char *)malloc(count * size);
+	if (ptr == NULL)
+		return (NULL);
+	while (i < count)
 	{
-		while (len > 0)
-		{
-			*ptr = 0;
-			ptr++;
-			len--;
-		}
-		return (ptr);
+		*(ptr + i) = 0;
+		i++;
 	}
-	return (NULL);
+	return (ptr);
 }
 
 size_t ft_strlcpy(char *dst, const char *src, size_t dstsize)
