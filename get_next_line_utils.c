@@ -60,21 +60,21 @@ char *ft_strjoin(char const *s1, char const *s2)
 	return (ptr);
 }
 
-void *ft_calloc(size_t count, size_t size)
+void	*ft_calloc(size_t count, size_t size)
 {
-	char *s1;
-	size_t i;
+	char	*ptr;
+	size_t	i;
 
-	s1 = (char *)malloc(count * size);
-	if (s1 == NULL)
-		return (NULL);
 	i = 0;
+	ptr = (char *)malloc(count * size);
+	if (ptr == NULL)
+		return (NULL);
 	while (i < count)
 	{
-		*(s1 + i) = 0;
+		*(ptr + i) = 0;
 		i++;
 	}
-	return (s1);
+	return (ptr);
 }
 
 size_t ft_strlcpy(char *dst, const char *src, size_t dstsize)
