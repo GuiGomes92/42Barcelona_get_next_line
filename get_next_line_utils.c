@@ -40,7 +40,7 @@ char *ft_strjoin(char const *s1, char const *s2)
 	int i;
 	int j;
 
-	ptr = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
+	ptr = (char *)malloc(((ft_strlen(s1) + ft_strlen(s2)) + 1) * sizeof(char));
 	if (ptr == NULL)
 		return (NULL);
 	i = 0;
@@ -80,27 +80,22 @@ void	*ft_calloc(size_t count, size_t size)
 size_t ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
 	size_t i;
-	size_t srclen;
+	size_t len;
 
-	srclen = ft_strlen(src);
+	len = ft_strlen(src);
+	if (dstsize == 0)
+		return (len);
 	i = 0;
-	if (!dstsize)
-		return (srclen);
-	if (dstsize > 0)
+	while (i < dstsize)
 	{
-		while (i != dstsize - 1)
+		if(*(src + i) == '\0')
 		{
-			if (src[i] != '\0')
-			{
-				dst[i] = src[i];
-			}
-			else
-			{
-				break;
-			}
-			i++;
+			*(dst + i) = *(src + i);
+			return (len);
 		}
-		dst[i] = '\0';
+		*(dst + i) = *(src + i);
+		i++;
 	}
-	return (srclen);
+	*(dst + i - 1) = '\0';
+	return (len);
 }

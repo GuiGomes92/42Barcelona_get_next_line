@@ -36,6 +36,7 @@ char *ft_extract_line(char *buffer)
 	if (!buffer || buffer[0] == '\0')
 		return (NULL);
 	len = ft_linelen(buffer) + 2;
+	printf("%zu\n", len);
 	line = ft_calloc(len, sizeof(char));
 	ft_strlcpy(line, buffer, len);
 	return (line);
