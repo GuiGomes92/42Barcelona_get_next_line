@@ -6,21 +6,19 @@
 /*   By: gbraga-g <gbraga-g@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 19:47:35 by gbraga-g          #+#    #+#             */
-/*   Updated: 2022/07/18 19:47:37 by gbraga-g         ###   ########.fr       */
+/*   Updated: 2022/07/18 21:08:28 by gbraga-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int ft_strlen(const char *s)
+int ft_strlen(char *s)
 {
 	int i;
 
 	i = 0;
 	while (s[i] != '\0')
-	{
 		i++;
-	}
 	return (i);
 }
 
@@ -34,7 +32,7 @@ int ft_linelen(char *s)
 	return (i);
 }
 
-char *ft_strchr(const char *s, int c)
+char *ft_strchr(char *s, int c)
 {
 	char newC;
 
@@ -46,13 +44,15 @@ char *ft_strchr(const char *s, int c)
 	return (0);
 }
 
-char *ft_strjoin(char const *s1, char const *s2)
+char *ft_strjoin(char *s1, char *s2)
 {
 	char *ptr;
 	int i;
 	int j;
+	int len;
 
-	ptr = (char *)malloc(((ft_strlen(s1) + ft_strlen(s2)) + 1) * sizeof(char));
+	len = (ft_strlen(s1) + ft_strlen(s2)) + 1;
+	ptr = (char *)malloc(len * sizeof(char));
 	if (ptr == NULL)
 		return (NULL);
 	i = 0;
@@ -89,7 +89,7 @@ void	*ft_calloc(size_t count, size_t size)
 	return (ptr);
 }
 
-size_t ft_strlcpy(char *dst, const char *src, size_t dstsize)
+size_t ft_strlcpy(char *dst, char *src, size_t dstsize)
 {
 	size_t i;
 	size_t len;

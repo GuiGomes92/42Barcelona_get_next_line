@@ -6,7 +6,7 @@
 /*   By: gbraga-g <gbraga-g@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 19:47:09 by gbraga-g          #+#    #+#             */
-/*   Updated: 2022/07/18 19:47:12 by gbraga-g         ###   ########.fr       */
+/*   Updated: 2022/07/18 21:08:26 by gbraga-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char *ft_read(int fd, char *buffer)
 		free(buffer);
 		buffer = new_buffer;
 	}
-	free(reading);
+	free (reading);
 	return (buffer);
 }
 
