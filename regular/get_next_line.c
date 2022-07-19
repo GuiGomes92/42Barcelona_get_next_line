@@ -6,7 +6,7 @@
 /*   By: gbraga-g <gbraga-g@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 19:47:09 by gbraga-g          #+#    #+#             */
-/*   Updated: 2022/07/18 21:08:26 by gbraga-g         ###   ########.fr       */
+/*   Updated: 2022/07/19 20:15:16 by gbraga-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,9 @@ char *ft_extract_line(char *buffer)
 	if (!buffer || buffer[0] == '\0')
 		return (NULL);
 	len = ft_linelen(buffer) + 2;
-	printf("%zu\n", len);
 	line = ft_calloc(len, sizeof(char));
+	if (!line)
+		return (NULL);
 	ft_strlcpy(line, buffer, len);
 	return (line);
 }
@@ -75,23 +76,25 @@ char *ft_read(int fd, char *buffer)
 		free(buffer);
 		buffer = new_buffer;
 	}
+	if (bytes_read == -1)
+		return (NULL);
 	free (reading);
 	return (buffer);
 }
 
 char *get_next_line(int fd)
 {
-	static char *stash[1024];
+	static char *stash;
 	char *line;
 
-	if (fd < 0 || fd > 1023 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (!stash[fd])
-		stash[fd] = ft_calloc(1, 1);
-	if (stash[fd] == NULL)
+	if (!stash)
+		stash = ft_calloc(1, 1);
+	if (stash == NULL)
 		return (NULL);
-	stash[fd] = ft_read(fd, stash[fd]);
-	line = ft_extract_line(stash[fd]);
-	stash[fd] = ft_remove_line(stash[fd]);
+	stash = ft_read(fd, stash);
+	line = ft_extract_line(stash);
+	stash = ft_remove_line(stash);
 	return (line);
 }

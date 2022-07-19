@@ -6,7 +6,7 @@
 /*   By: gbraga-g <gbraga-g@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 19:47:35 by gbraga-g          #+#    #+#             */
-/*   Updated: 2022/07/18 21:08:28 by gbraga-g         ###   ########.fr       */
+/*   Updated: 2022/07/19 20:20:39 by gbraga-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	*ft_calloc(size_t count, size_t size)
 		return (NULL);
 	while (i < count)
 	{
-		*(ptr + i) = 0;
+		*(ptr + i) = '\0';
 		i++;
 	}
 	return (ptr);
@@ -108,6 +108,7 @@ size_t ft_strlcpy(char *dst, char *src, size_t dstsize)
 		*(dst + i) = *(src + i);
 		i++;
 	}
-	*(dst + i - 1) = '\0';
+	*(dst + i - 1) = '\n';
+	//*(dst + i) = '\0';
 	return (len);
 }
