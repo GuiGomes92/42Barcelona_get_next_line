@@ -5,5 +5,6 @@ int main(void)
 	int fd;
 
 	fd = open("files/text.txt", O_RDONLY);
-	get_next_line(fd);
+	while (get_next_line(fd) != 0)
+		get_next_line(fd);
 }

@@ -14,10 +14,10 @@
 
 char *ft_remove_line(char *buffer)
 {
-	int		i;
-	char	*newbuffer;
-	int		start;
-	
+	int i;
+	char *newbuffer;
+	int start;
+
 	i = 0;
 	if (!buffer)
 		return (NULL);
@@ -30,7 +30,7 @@ char *ft_remove_line(char *buffer)
 	newbuffer = ft_calloc(ft_strlen(buffer) - start + 1, sizeof(char));
 	if (newbuffer == NULL)
 		return (NULL);
-	while(buffer[start + i] != '\0')
+	while (buffer[start + i] != '\0')
 	{
 		newbuffer[i] = buffer[start + i];
 		i++;
@@ -78,7 +78,7 @@ char *ft_read(int fd, char *buffer)
 	}
 	if (bytes_read == -1)
 		return (NULL);
-	free (reading);
+	free(reading);
 	return (buffer);
 }
 
@@ -94,7 +94,14 @@ char *get_next_line(int fd)
 	if (stash == NULL)
 		return (NULL);
 	stash = ft_read(fd, stash);
+	printf("%s\n", "---------------------------------STASH----------------------------------------------------");
+	printf("%s\n", stash);
+	printf("%s\n", "---------------------------------READ----------------------------------------------------");
 	line = ft_extract_line(stash);
+	printf("%s\n", line);
+	printf("%s\n", "---------------------------------LINE----------------------------------------------------");
 	stash = ft_remove_line(stash);
+	printf("%s\n", stash);
+	printf("%s\n", "---------------------------------AFTER EXTRACT-------------------------------------------");
 	return (line);
 }
