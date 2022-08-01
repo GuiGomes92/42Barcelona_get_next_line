@@ -6,7 +6,7 @@
 /*   By: gbraga-g <gbraga-g@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 19:47:09 by gbraga-g          #+#    #+#             */
-/*   Updated: 2022/07/19 20:15:16 by gbraga-g         ###   ########.fr       */
+/*   Updated: 2022/08/01 19:29:12 by gbraga-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,11 @@ char *ft_remove_line(char *buffer)
 	while (buffer[start + i] != '\0')
 	{
 		newbuffer[i] = buffer[start + i];
+		//printf("%c\n",newbuffer[i]);
 		i++;
 	}
 	newbuffer[i] = buffer[start + i];
+	//printf("%s\n", newbuffer);
 	free(buffer);
 	return (newbuffer);
 }
@@ -47,11 +49,12 @@ char *ft_extract_line(char *buffer)
 
 	if (!buffer || buffer[0] == '\0')
 		return (NULL);
-	len = ft_linelen(buffer) + 2;
+	len = ft_linelen(buffer) + 1;
 	line = ft_calloc(len, sizeof(char));
 	if (!line)
 		return (NULL);
 	ft_strlcpy(line, buffer, len);
+	//printf("%s\n", line);
 	return (line);
 }
 
@@ -71,7 +74,6 @@ char *ft_read(int fd, char *buffer)
 		bytes_read = read(fd, reading, BUFFER_SIZE);
 		if (bytes_read < 1)
 			break;
-		reading[bytes_read] = '\0';
 		new_buffer = ft_strjoin(buffer, reading);
 		free(buffer);
 		buffer = new_buffer;
@@ -94,7 +96,10 @@ char *get_next_line(int fd)
 	if (stash == NULL)
 		return (NULL);
 	stash = ft_read(fd, stash);
+	//printf("READ: %s\n", stash);
 	line = ft_extract_line(stash);
+	//printf("EXTRACT: %s\n", line);
 	stash = ft_remove_line(stash);
+	//printf("STASH: %s\n", stash);
 	return (line);
 }

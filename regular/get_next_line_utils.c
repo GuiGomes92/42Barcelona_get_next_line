@@ -6,7 +6,7 @@
 /*   By: gbraga-g <gbraga-g@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 19:47:35 by gbraga-g          #+#    #+#             */
-/*   Updated: 2022/07/19 20:20:39 by gbraga-g         ###   ########.fr       */
+/*   Updated: 2022/08/01 19:24:23 by gbraga-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char *ft_strjoin(char *s1, char *s2)
 	int j;
 	int len;
 
-	len = (ft_strlen(s1) + ft_strlen(s2)) + 1;
+	len = ft_strlen(s1) + ft_strlen(s2) + 1;
 	ptr = (char *)malloc(len * sizeof(char));
 	if (ptr == NULL)
 		return (NULL);
@@ -109,6 +109,6 @@ size_t ft_strlcpy(char *dst, char *src, size_t dstsize)
 		i++;
 	}
 	*(dst + i - 1) = '\n';
-	//*(dst + i) = '\0';
+	*(dst + i) = '\0';
 	return (len);
 }
