@@ -6,7 +6,7 @@
 /*   By: gbraga-g <gbraga-g@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 19:47:09 by gbraga-g          #+#    #+#             */
-/*   Updated: 2022/08/01 20:01:55 by gbraga-g         ###   ########.fr       */
+/*   Updated: 2022/08/02 21:02:04 by gbraga-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ char *ft_remove_line(char *buffer)
 		return (NULL);
 	}
 	start = ft_linelen(buffer) + 1;
+	if (!buffer[start - 1])
+	{
+		free(buffer);
+		return(NULL);
+	}
 	newbuffer = ft_calloc(ft_strlen(buffer) - start + 1, sizeof(char));
 	if (newbuffer == NULL)
 		return (NULL);
@@ -49,7 +54,7 @@ char *ft_extract_line(char *buffer)
 
 	if (!buffer || buffer[0] == '\0')
 		return (NULL);
-	len = ft_linelen(buffer) + 1;
+	len = ft_linelen(buffer) + 2;
 	line = ft_calloc(len, sizeof(char));
 	if (!line)
 		return (NULL);
@@ -78,9 +83,12 @@ char *ft_read(int fd, char *buffer)
 		free(buffer);
 		buffer = new_buffer;
 	}
-	if (bytes_read == -1)
-		return (NULL);
 	free(reading);
+	if (bytes_read == -1)
+	{
+		free(new_buffer);
+		return (NULL);
+	}
 	return (buffer);
 }
 
