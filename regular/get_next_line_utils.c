@@ -74,10 +74,10 @@ char *ft_strjoin(char *s1, char *s2)
 	return (ptr);
 }
 
-void	*ft_calloc(size_t count, size_t size)
+void *ft_calloc(size_t count, size_t size)
 {
-	char	*ptr;
-	size_t	i;
+	char *ptr;
+	size_t i;
 
 	i = 0;
 	ptr = (char *)malloc(count * size);
@@ -102,7 +102,7 @@ size_t ft_strlcpy(char *dst, char *src, size_t dstsize)
 	i = 0;
 	while (i < dstsize)
 	{
-		if(*(src + i) == '\0')
+		if (*(src + i) == '\0')
 		{
 			*(dst + i) = *(src + i);
 			return (len);
@@ -110,7 +110,6 @@ size_t ft_strlcpy(char *dst, char *src, size_t dstsize)
 		*(dst + i) = *(src + i);
 		i++;
 	}
-	//*(dst + i - 1) = '\n';
-	*(dst + i) = '\0';
+	*(dst + i - 1) = '\0';
 	return (len);
 }
