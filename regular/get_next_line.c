@@ -6,7 +6,7 @@
 /*   By: gbraga-g <gbraga-g@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 19:47:09 by gbraga-g          #+#    #+#             */
-/*   Updated: 2022/08/02 21:02:04 by gbraga-g         ###   ########.fr       */
+/*   Updated: 2022/08/13 12:24:48 by gbraga-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char *ft_remove_line(char *buffer)
 	if (!buffer[start - 1])
 	{
 		free(buffer);
-		return(NULL);
+		return (NULL);
 	}
 	newbuffer = ft_calloc(ft_strlen(buffer) - start + 1, sizeof(char));
 	if (newbuffer == NULL)
@@ -38,11 +38,9 @@ char *ft_remove_line(char *buffer)
 	while (buffer[start + i] != '\0')
 	{
 		newbuffer[i] = buffer[start + i];
-		//printf("%c\n",newbuffer[i]);
 		i++;
 	}
 	newbuffer[i] = buffer[start + i];
-	//printf("%s\n", newbuffer);
 	free(buffer);
 	return (newbuffer);
 }
@@ -59,7 +57,6 @@ char *ft_extract_line(char *buffer)
 	if (!line)
 		return (NULL);
 	ft_strlcpy(line, buffer, len);
-	//printf("%s\n", line);
 	return (line);
 }
 
@@ -73,12 +70,13 @@ char *ft_read(int fd, char *buffer)
 		return (buffer);
 	reading = ft_calloc((BUFFER_SIZE + 1), sizeof(char));
 	if (reading == NULL)
-		return (NULL);
+		return (buffer);
 	while (ft_strchr(reading, '\n') == 0)
 	{
 		bytes_read = read(fd, reading, BUFFER_SIZE);
 		if (bytes_read < 1)
 			break;
+		reading[bytes_read] = '\0';
 		new_buffer = ft_strjoin(buffer, reading);
 		free(buffer);
 		buffer = new_buffer;
@@ -104,10 +102,7 @@ char *get_next_line(int fd)
 	if (stash == NULL)
 		return (NULL);
 	stash = ft_read(fd, stash);
-	//printf("READ: %s\n", stash);
 	line = ft_extract_line(stash);
-	//printf("EXTRACT: %s\n", line);
 	stash = ft_remove_line(stash);
-	//printf("STASH: %s\n", stash);
 	return (line);
 }
