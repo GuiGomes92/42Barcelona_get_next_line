@@ -6,7 +6,7 @@
 /*   By: gbraga-g <gbraga-g@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/18 19:47:09 by gbraga-g          #+#    #+#             */
-/*   Updated: 2022/08/13 13:39:31 by gbraga-g         ###   ########.fr       */
+/*   Updated: 2022/08/14 21:20:07 by gbraga-g         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || fd > 1023 || BUFFER_SIZE <= 0)
 		return (NULL);
-	if (read(fd, 0, 0) < 0)
+	if (read(fd, 0, 0) < 0 && !stash[fd])
 		return (NULL);
 	if (!stash[fd])
 		stash[fd] = ft_calloc(1, 1);
